@@ -51,6 +51,7 @@
 
 > **[Dynamic To Do List]**
 > **[Add CRUD method (Add,remove, update,delete)]**
+> **[Make list interactive)]**
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -137,7 +138,7 @@ git and github pages
 
 ## 🔭 Future Features <a name="future-features"></a>
 
->  **Refactor code to add and remove to/from list**
+>  **Make code more dynamic and improve UI**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
