@@ -1,35 +1,80 @@
-// import _ from 'lodash';
 import './style.css';
+import Tasks from '../modules/tasks.js';
+import editTask from '../modules/edit.js';
+import clearCompletedTasks from '../modules/clear.js';
+import updateTaskStatus from '../modules/status.js';
 
-const task1 = {
-  description: 'Work on todo project',
-  completed: true,
-  index: 1,
-};
-const task2 = {
-  description: 'Work with coding partners',
-  completed: false,
-  index: 2,
-};
-const task3 = {
-  description: 'Complete all exercises',
-  completed: false,
-  index: 3,
-};
+const displayContainer = document.getElementById('do-list');
 
-const tasks = [task1, task2, task3];
-const taskList = document.querySelector('.listItems');
-const checkboxInput = document.createElement('input');
+// Display the book in the array
+function printTasks() {
+  const array = JSON.parse(localStorage.getItem('array')) || [];
+  let innerhtml = '';
+  let checker = '';
 
-const displayTask = () => {
-  for (let i = 0; i < tasks.length; i += 1) {
-    const list = tasks[i];
-    taskList.innerHTML += `<li class="task flex">
- <input type="checkbox" id="checked" name="checked" >
- <label class="label" id="label" for="checked">${list.description}</label>
-</li>`;
-    checkboxInput.checked = true;
+  array.forEach((task) => {
+    if (task.completed === false) {
+      checker = '';
+    } else {
+      checker = 'checked';
+    }
+    innerhtml += `
+    <div class="each-row">
+    <div class="row-info">
+    <input ${checker} type="checkbox" class="check" id="input${task.index}">
+     <input id="${task.index}" class="task-list list" value="${task.description}"></div>
+     <button  type="button" id="remove-btn${task.index}" class="row-btn material-symbols-outlined">
+     do_not_disturb_on
+    </button>
+   </div>
+   `;
+  });
+
+  const doList = document.querySelector('#do-list');
+  const inputForm = document.getElementById('input-form');
+  const description = document.getElementById('input-task');
+
+  // Calling the event listener when the form is submitted
+
+  inputForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const obj = new Tasks();
+    obj.addTask(description.value);
+    printTasks();
+
+    description.value = '';
+  });
+
+  doList.innerHTML = innerhtml;
+}
+
+// Call the Delete function
+displayContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('row-btn')) {
+    const initialID = e.target.id;
+    const { length } = initialID;
+    const id = initialID.slice(10, length);
+    const finalID = Number(id);
+    const obj = new Tasks();
+    obj.removeTask(finalID);
+    printTasks();
   }
-};
+});
 
-window.onload = displayTask();
+// Edit task
+
+const array = JSON.parse(localStorage.getItem('array')) || [];
+displayContainer.addEventListener('click', (e) => {
+  if (e.target.classList.contains('task-list')) {
+    editTask(e.target, array);
+  }
+});
+
+// This function update the checkbox status
+updateTaskStatus();
+
+// This function clear completed task
+clearCompletedTasks();
+
+// Calling the display function
+printTasks();
