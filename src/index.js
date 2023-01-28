@@ -1,8 +1,8 @@
 import './style.css';
-import Tasks from '../modules/tasks.js';
+import Tasks from '../modules/manageTask.js';
 import editTask from '../modules/edit.js';
 import clearCompletedTasks from '../modules/clear.js';
-import updateStatus from '../modules/status.js';
+import updateTaskStatus from '../modules/status.js';
 
 const displayContainer = document.getElementById('do-list');
 
@@ -71,7 +71,7 @@ displayContainer.addEventListener('click', (e) => {
 });
 
 // This function update the checkbox status
-updateStatus();
+updateTaskStatus();
 
 // This function clear completed task
 clearCompletedTasks();

@@ -1,19 +1,19 @@
-export default function updateStatus() {
+export default function updateTaskStatus() {
   document.addEventListener('DOMContentLoaded', () => {
-    const checkInput = document.querySelectorAll('.check');
-    checkInput.forEach((check) => {
+    const inputChecks = document.querySelectorAll('.check');
+    inputChecks.forEach((check) => {
       check.addEventListener('change', (e) => {
-        let tasks = [];
-        tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-        tasks.forEach((task) => {
+        let array = [];
+        array = JSON.parse(localStorage.getItem('array') || '[]');
+        array.forEach((task) => {
           if ((e.target.id === `input${task.index}`) && (task.completed === false)) {
             task.completed = true;
             e.target.checked = true;
-            localStorage.setItem('tasks', JSON.stringify(tasks));
+            localStorage.setItem('array', JSON.stringify(array));
           } else if ((e.target.id === `input${task.index}`) && (task.completed === true)) {
             task.completed = false;
             e.target.checked = false;
-            localStorage.setItem('tasks', JSON.stringify(tasks));
+            localStorage.setItem('array', JSON.stringify(array));
           }
         });
       });
