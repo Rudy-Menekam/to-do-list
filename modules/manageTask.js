@@ -1,3 +1,4 @@
+/* eslint-disable */
 const array = [];
 export default class Tasks {
   constructor(description) {
@@ -10,6 +11,8 @@ export default class Tasks {
     this.description = description;
     if (description === '') {
       document.getElementById('message').innerHTML = '';
+      message.style.color ='red';
+
     } else {
       const array = JSON.parse(localStorage.getItem('array')) || [];
       const newBook = new Tasks(description);
@@ -18,7 +21,6 @@ export default class Tasks {
         work.index = i + 1;
       });
       localStorage.setItem('array', JSON.stringify(array));
-      document.getElementById('message').innerHTML = '';
     }
   }
 
@@ -33,7 +35,6 @@ export default class Tasks {
         });
         localStorage.setItem('array', JSON.stringify(array));
       }
-      return false;
     });
   }
 }

@@ -1,5 +1,5 @@
 import './style.css';
-import Tasks from '../modules/tasks.js';
+import Tasks from '../modules/manageTask.js';
 import editTask from '../modules/edit.js';
 import clearCompletedTasks from '../modules/clear.js';
 import updateTaskStatus from '../modules/status.js';
