@@ -1,4 +1,5 @@
 /* eslint-disable */
+/* global localStorage, */
 const array = [];
 export default class Tasks {
   constructor(description) {
@@ -38,3 +39,5 @@ export default class Tasks {
     });
   }
 }
+
+Object.defineProperty(jsdom, "localStorage", { value: Tasks});
